@@ -25,7 +25,6 @@ export const confirmModalActionCreator = async ({
     showNotificationError,
     showNotificationSuccess,
     resetInitialFormValuesAction,
-
   },
 }: ParamsType) => {
   dispatch(confirmModalLoadingStart())
@@ -55,14 +54,15 @@ export const confirmModalActionCreator = async ({
     const formattedResponseData = responseDataFormatter
       ? responseDataFormatter(responseData.data)
       : responseData.data;
+      
 
     // dispatch success actions
     if (setSuccessAction) {
       dispatch(setSuccessAction(formattedResponseData));
     } else if (setSuccessActionsArray && setSuccessActionsArray.length) {
-      // eslint-disable-next-line
-      // @ts-ignore
-      dispatch(batchActions(setSuccessActionsArray));
+      const preparedActions = setSuccessActionsArray.map(action=>action(formattedResponseData))
+
+      dispatch(batchActions(preparedActions));
     }    
 
     // trigger success notification
@@ -85,10 +85,9 @@ export const confirmModalActionCreator = async ({
     // dispatch fail actions
     if (setErrorAction) {
      dispatch(setErrorAction(errorData.errorText));
-    } else if (setErrorActionsArray && setErrorActionsArray.length) {
-      // eslint-disable-next-line
+    } else if (setErrorActionsArray && setErrorActionsArray.length) {      // eslint-disable-next-line
       // @ts-ignore
-      dispatch(batchActions(setErrorActionsArray))
+      dispatch(batchActions(setErrorActionsArray.map(action=>action(errorData))))
     }
 
     // trigger failed notification
