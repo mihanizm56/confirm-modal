@@ -10,14 +10,14 @@ export type IMakeExternalActionParams = {
   additionalPayload?: any;
 };
 
-export interface INotificationsStorage {
+export interface IConfirmModalStorage {
   isModalOpened: boolean;
   modalParams: ConfirmModalStateType;
   isConfirmModalLoading: boolean;
 }
 
 export interface IConfirmModalStoragePart {
-  [CONFIRM_MODALS_REDUCER_NAME]: INotificationsStorage;
+  [CONFIRM_MODALS_REDUCER_NAME]: IConfirmModalStorage;
 }
 
 export type BaseAction = () => {
@@ -54,17 +54,13 @@ export type ConfirmModalActionParamsType = {
   setErrorActionsArray?: Array<AnyAction>;
   setSuccessAction?: AnyAction;
   setSuccessActionsArray?: Array<AnyAction>;
-  notificationParams: {
-    successNotificatonParams?: {
-      text: string;
-    };
-    errorNotificatonParams?: {
-      text: string;
-    };
-  };
+  notificationSuccessText?: string;
+  notificationErrorText?: string;
   responseDataFormatter?: (data: any) => any;
   withoutFormattingError?: boolean;
   resetInitialFormValuesAction?: AnyAction;
+  showNotificationError: boolean;
+  showNotificationSuccess: boolean;
 };
 
 export type ConfirmModalStateType = {

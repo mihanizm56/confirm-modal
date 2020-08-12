@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { IConfirmModalStoragePart, INotificationsStorage } from '@/types/types';
+import { IConfirmModalStoragePart, IConfirmModalStorage } from '@/types/types';
 import { CONFIRM_MODALS_REDUCER_NAME } from './constants';
 import { initialState } from './reducer';
 
@@ -8,20 +8,20 @@ const modalStorageSelector = (store: IConfirmModalStoragePart) =>
 
 export const getIsConfirmModalOpened = createSelector(
   [modalStorageSelector],
-  ({ isModalOpened }: INotificationsStorage) => isModalOpened,
+  ({ isModalOpened }: IConfirmModalStorage) => isModalOpened,
 );
 
 export const getConfirmModalParams = createSelector(
   [modalStorageSelector],
-  ({ modalParams }: INotificationsStorage) => modalParams,
+  ({ modalParams }: IConfirmModalStorage) => modalParams,
 );
 
 export const getConfirmActionParams = createSelector(
   [modalStorageSelector],
-  ({ modalParams }: INotificationsStorage) => modalParams.confirmActionParams,
+  ({ modalParams }: IConfirmModalStorage) => modalParams.confirmActionParams,
 );
 
 export const getConfirmModalIsLoading = createSelector(
   [modalStorageSelector],
-  ({ isConfirmModalLoading }: INotificationsStorage) => isConfirmModalLoading,
+  ({ isConfirmModalLoading }: IConfirmModalStorage) => isConfirmModalLoading,
 );

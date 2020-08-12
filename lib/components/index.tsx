@@ -103,7 +103,7 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
     dispatch,
   );
 
-export const Notifications = connect(
+export const ConfirmModal = connect(
   mapStateToProps,
   mapDispatchToProps,
 )(WrappedContainer);

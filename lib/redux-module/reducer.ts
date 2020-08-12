@@ -1,4 +1,4 @@
-import { INotificationsStorage } from '@/types/types';
+import { IConfirmModalStorage } from '@/types/types';
 import {
   SET_CONFIRM_MODAL,
   CLOSE_CONFIRM_MODAL,
@@ -6,7 +6,7 @@ import {
   CONFIRM_MODAL_LOADING_STOP,
 } from './actions';
 
-export const initialState: INotificationsStorage = {
+export const initialState: IConfirmModalStorage = {
   isModalOpened: false,
   modalParams: {
     confirmButtonProps: {
@@ -20,8 +20,8 @@ export const initialState: INotificationsStorage = {
   isConfirmModalLoading: false,
 };
 
-export const notificationsModuleReducer = (
-  state: INotificationsStorage = initialState,
+export const confirmModalModuleReducer = (
+  state: IConfirmModalStorage = initialState,
   { type, payload }: any,
 ) => {
   switch (type) {

@@ -20,8 +20,12 @@ export const confirmModalActionCreator = async ({
     setErrorActionsArray,
     setSuccessAction,
     setSuccessActionsArray,
-    notificationParams,
+    notificationSuccessText,
+    notificationErrorText,
+    showNotificationError,
+    showNotificationSuccess,
     resetInitialFormValuesAction,
+
   },
 }: ParamsType) => {
   dispatch(confirmModalLoadingStart())
@@ -59,14 +63,15 @@ export const confirmModalActionCreator = async ({
       // eslint-disable-next-line
       // @ts-ignore
       dispatch(batchActions(setSuccessActionsArray));
-    }
+    }    
 
     // trigger success notification
-    if (notificationParams && notificationParams.successNotificatonParams) {
+    if (showNotificationSuccess && notificationSuccessText) {
+      
       dispatch(
         setModalAction({
           status: 'success',
-          text: notificationParams.successNotificatonParams.text,
+          text:notificationSuccessText,
         }),
       );
     }
@@ -86,15 +91,15 @@ export const confirmModalActionCreator = async ({
       dispatch(batchActions(setErrorActionsArray))
     }
 
-        // trigger success notification
-        if (notificationParams && notificationParams.errorNotificatonParams) {
-          dispatch(
-            setModalAction({
-              status: 'error',
-              text: notificationParams.errorNotificatonParams.text,
-            }),
-          );
-        }
+    // trigger failed notification
+    if(showNotificationError){
+      dispatch(
+        setModalAction({
+          status: 'error',
+          text: notificationErrorText || errorData.errorText,
+        }),
+      );
+    }
   } finally{
     dispatch(confirmModalLoadingStop())
   }
