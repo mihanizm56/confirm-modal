@@ -57,7 +57,6 @@ export type ConfirmModalActionParamsType = {
   notificationSuccessText?: string;
   notificationErrorText?: string;
   responseDataFormatter?: (data: any) => any;
-  withoutFormattingError?: boolean;
   resetInitialFormValuesAction?: AnyAction;
   showNotificationError: boolean;
   showNotificationSuccess: boolean;

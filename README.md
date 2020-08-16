@@ -1,96 +1,103 @@
-# @wildberries/notifications
+# @wildberries/confirm-modal-portal
 
-## Sollution for notifications, connected with redux
+## Sollution for confirm modals, connected with redux
 
 ## Examples of usage
 
 ### Installation
 
 ```javascript
-npm install @mihanizm56/notifications
+npm install @wildberries/confirm-modal-portal
 ```
 
 ### Connect to your root reducer
 
 ```javascript
-import {notificationsState} from '@wildberries/notifications';
+import {
+  CONFIRM_MODALS_REDUCER_NAME,
+  confirmModalModuleReducer,
+} from '@wildberries/confirm-modal-portal';
 
 export const rootReducer = {
-  notificationsState,
-  ...other root reducers
+  [CONFIRM_MODALS_REDUCER_NAME]: confirmModalModuleReducer,
 };
 ```
 
-### Insert the Notifications component into your project
+### Insert the ConfirmModal component into your project
 
 ```javascript
 import React, { memo } from "react";
-import { Notifications, setModalAction } from "@wildberries/notifications";
-import { createPortal } from 'react-dom';
-import { uniqueId } from 'lodash-es'
-
-const portalElement = document.getElementById('portal');
-
-class Portal extends React.PureComponent{
-  constructor(props) {
-    super(props);
-
-    this.containerEl = document.createElement('div');
-    this.containerEl.id = `${props.prefix}_${uniqueId('id_')}`;
-    portalElement.appendChild(this.containerEl);
-  }
-
-  componentWillUnmount() {
-    this.containerEl.remove();
-  }
-
-  render() {
-    return createPortal(this.props.children, this.containerEl);
-  }
-}
+import { ConfirmModal } from '@wildberries/confirm-modal-portal';
 
 const TestComponent = memo(() => (
-    <div className="TestComponent">
-    <Portal prefix="notifications">
-      <Notifications />
-    </Portal>
-    </div>
-  );
-})
+    <ConfirmModal />
+  )
+)
 ```
 
-### Dispatch setModalAction to add notifications modal
+### Dispatch setConfirmModalAction to add confirm modal
 
 #### SetModalAction params:
- - status - `success | error` - modal status (required)
- - text - `string` - modal test (required)
- - additionalPayload - `string` - payload of additional action if need to call from modal (not required)
- - additionalActionType - `any` - type of additional action if need to call from modal (not required)
+  - requestParamsFormatter - formatter before equest data will be sent
+  - request - the request that needs to be confirmed
+  - requestParams - params that will be set to the request
+  - setErrorAction - the action that will be dispatched when error from the request comes
+  - setErrorActionsArray - the array of actions that will be dispatched when error from the request comes
+  - setSuccessAction - the action that will be dispatched when success from the request comes
+  - setSuccessActionsArray - the array of actions that will be dispatched when success from the request comes
+  - notificationSuccessText - the text for the successful notification
+  - notificationErrorText - the text for the error notification
+  - responseDataFormatter - formatter of the data that goes to the success action (or an array of actions)
+  - resetInitialFormValuesAction - resetting form values (RFF needs if connected to the redux)
+  - showNotificationError - flag to show error notification when error from the request comes
+  - showNotificationSuccess - flag to show success notification when success from the request comes
 
 ```javascript
 import React from "react";
-import { setModalAction } from "@wildberries/notifications";
-import { uniqueId } from 'lodash-es'
+import {
+  setConfirmModalAction,
+  ConfirmModalStateType,
+  closeConfirmModalAction,
+} from '@wildberries/confirm-modal-portal';
 import { useDispatch } from "react-redux";
 
-function ExampleComponent) {
+function ExampleComponent() {
   const dispatch = useDispatch();
 
-  const setModal = () => {
-    dispatch(setModalAction({
-      status: 'success',
-      text: 'modal text',
-      additionalPayload: { foo:'bar' }, 
-      additionalActionType: 'SOME_TYPE',
-    }))
+  const openConfirmModal = () => {
+    dispatch(
+      this.props.setConfirmModalAction({
+        content: <SomeYourContentComponent />,
+        confirmActionParams: {
+          request: deleteUserFromSupplierRequest,
+          requestParams: { foo: 'bar' },
+          setSuccessActionsArray: [
+            this.props.closeConfirmModal,
+            () =>
+              this.props.deleteSupplierUser({
+                supplierId,
+                userId,
+              }),
+          ],
+          notificationSuccessText: 'Пользователь был удалён',
+          showNotificationError: true,
+          showNotificationSuccess: true,
+        },
+        confirmButtonProps: {
+          text: 'Удалить',
+        },
+        cancelButtonProps: {
+          text: 'Отмена',
+        },
+      })
   }
 
   return (
     <div className="ExampleComponent">
-        <button onClick={setModal}>button</button>
+        <button onClick={openConfirmModal}>button</button>
     </div>
   );
 }
 
-export default App;
+export default ExampleComponent;
 ```
