@@ -20,7 +20,7 @@ export const confirmModalActionCreator = async ({
     setErrorActionsArray,
     setSuccessAction,
     setSuccessActionsArray,
-    notificationSuccessText,
+    notificationSuccessConfig,
     notificationErrorText,
     showNotificationError,
     showNotificationSuccess,
@@ -66,12 +66,13 @@ export const confirmModalActionCreator = async ({
     }    
 
     // trigger success notification
-    if (showNotificationSuccess && notificationSuccessText) {
+    if (showNotificationSuccess && (notificationSuccessConfig)) {
       
       dispatch(
         setModalAction({
           status: 'success',
-          text:notificationSuccessText,
+          text:notificationSuccessConfig.text,
+          title:notificationSuccessConfig.title
         }),
       );
     }

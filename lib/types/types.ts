@@ -60,6 +60,10 @@ export type ConfirmModalActionParamsType = {
   resetInitialFormValuesAction?: AnyAction;
   showNotificationError: boolean;
   showNotificationSuccess: boolean;
+  notificationSuccessConfig?: {
+    text?: string;
+    title?: string;
+  };
 };
 
 export type ConfirmModalStateType = {
