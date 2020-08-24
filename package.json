@@ -1,6 +1,6 @@
 {
   "name": "@wildberries/confirm-modal-portal",
-  "version": "0.0.2-beta.2",
+  "version": "0.0.2-beta.3",
   "description": "confirm modal module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -29,7 +29,7 @@
     "url": "https://github.com/mihanizm56/notifications/issues"
   },
   "dependencies": {
-    "@wildberries/notifications": "1.0.1",
+    "@wildberries/notifications": "1.0.2",
     "@wildberries/ui-kit": "0.0.1-beta.46",
     "redux-batched-actions": "0.4.1",
     "react-final-form": "6.4.0",
