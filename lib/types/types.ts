@@ -54,8 +54,6 @@ export type ConfirmModalActionParamsType = {
   setErrorActionsArray?: Array<AnyAction>;
   setSuccessAction?: AnyAction;
   setSuccessActionsArray?: Array<AnyAction>;
-  notificationSuccessText?: string;
-  notificationErrorText?: string;
   responseDataFormatter?: (data: any) => any;
   resetInitialFormValuesAction?: AnyAction;
   showNotificationError: boolean;
@@ -64,11 +62,16 @@ export type ConfirmModalActionParamsType = {
     text?: string;
     title?: string;
   };
+  notificationErrorConfig?: {
+    text?: string;
+    title?: string;
+  };
 };
 
 export type ConfirmModalStateType = {
   title?: string;
   content?: any;
+  size?: 'm' | 's';
   confirmActionParams?: ConfirmModalActionParamsType;
   confirmButtonProps: {
     text: string;

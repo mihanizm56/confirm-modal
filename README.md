@@ -38,6 +38,14 @@ const TestComponent = memo(() => (
 ### Dispatch setConfirmModalAction to add confirm modal
 
 #### SetModalAction params:
+  - title - title of the modal
+  - content - modal content (React component)
+  - size - modal ui-kit size
+  - confirmActionParams - params of modal confirmation process (see below)
+  - confirmButtonProps - params of confirm button
+  - cancelButtonProps- params of cancel button
+
+#### ConfirmActionParams params:
   - requestParamsFormatter - formatter before equest data will be sent
   - request - the request that needs to be confirmed
   - requestParams - params that will be set to the request
@@ -45,8 +53,8 @@ const TestComponent = memo(() => (
   - setErrorActionsArray - the array of actions that will be dispatched when error from the request comes
   - setSuccessAction - the action that will be dispatched when success from the request comes
   - setSuccessActionsArray - the array of actions that will be dispatched when success from the request comes
-  - notificationSuccessText - the text for the successful notification
-  - notificationErrorText - the text for the error notification
+  - notificationSuccessConfig - the text config for the successful notification
+  - notificationErrorConfig - the text config for the error notification
   - responseDataFormatter - formatter of the data that goes to the success action (or an array of actions)
   - resetInitialFormValuesAction - resetting form values (RFF needs if connected to the redux)
   - showNotificationError - flag to show error notification when error from the request comes
@@ -79,7 +87,7 @@ function ExampleComponent() {
                 userId,
               }),
           ],
-          notificationSuccessText: 'Пользователь был удалён',
+          notificationSuccessConfig: {title:'Пользователь был удалён'},
           showNotificationError: true,
           showNotificationSuccess: true,
         },

@@ -16,6 +16,7 @@ export const initialState: IConfirmModalStorage = {
       text: '',
     },
     title: '',
+    size: 'm',
   },
   isConfirmModalLoading: false,
 };

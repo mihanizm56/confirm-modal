@@ -21,7 +21,7 @@ export const confirmModalActionCreator = async ({
     setSuccessAction,
     setSuccessActionsArray,
     notificationSuccessConfig,
-    notificationErrorText,
+    notificationErrorConfig,
     showNotificationError,
     showNotificationSuccess,
     resetInitialFormValuesAction,
@@ -66,7 +66,7 @@ export const confirmModalActionCreator = async ({
     }    
 
     // trigger success notification
-    if (showNotificationSuccess && (notificationSuccessConfig)) {
+    if (showNotificationSuccess && notificationSuccessConfig) {
       
       dispatch(
         setModalAction({
@@ -92,11 +92,12 @@ export const confirmModalActionCreator = async ({
     }
 
     // trigger failed notification
-    if(showNotificationError){
+    if(showNotificationError && notificationErrorConfig){
       dispatch(
         setModalAction({
           status: 'error',
-          text: notificationErrorText || errorData.errorText,
+          text: notificationErrorConfig.text || '',
+          title: notificationErrorConfig.title || errorData.errorText,
         }),
       );
     }
