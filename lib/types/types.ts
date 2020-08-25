@@ -71,7 +71,7 @@ export type ConfirmModalActionParamsType = {
 export type ConfirmModalStateType = {
   title?: string;
   content?: any;
-  size?: 'm' | 's';
+  size: 'm' | 's';
   confirmActionParams?: ConfirmModalActionParamsType;
   confirmButtonProps: {
     text: string;
