@@ -92,12 +92,16 @@ export const confirmModalActionCreator = async ({
     }
 
     // trigger failed notification
-    if(showNotificationError && notificationErrorConfig){
+    if(showNotificationError){
       dispatch(
         setModalAction({
           status: 'error',
-          text: notificationErrorConfig.text || '',
-          title: notificationErrorConfig.title || errorData.errorText,
+          text: notificationErrorConfig && notificationErrorConfig.text 
+            ? notificationErrorConfig.text 
+            : '',
+          title: notificationErrorConfig && notificationErrorConfig.title 
+            ? notificationErrorConfig.title 
+            : errorData.errorText,
         }),
       );
     }
