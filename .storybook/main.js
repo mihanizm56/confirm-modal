@@ -3,11 +3,12 @@ const path = require('path');
 const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
-  stories: ['../lib/**/*.stories.@(js|jsx|ts|tsx)'],
+  stories: ['../lib/**/*.stories.mdx', '../lib/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@storybook/addon-knobs',
+    '@storybook/addon-docs',
   ],
   webpackFinal: async (config, { configType }) => {
     config.module.rules.push({

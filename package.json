@@ -37,6 +37,7 @@
   "devDependencies": {
     "@commitlint/cli": "9.1.2",
     "@storybook/addon-actions": "6.0.22",
+    "@storybook/addon-docs": "6.0.22",
     "@storybook/addon-essentials": "6.0.22",
     "@storybook/addon-knobs": "6.0.22",
     "@storybook/addon-links": "6.0.22",

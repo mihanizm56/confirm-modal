@@ -8,6 +8,7 @@ import { setConfirmModalAction, closeConfirmModalAction } from '@/redux-module';
 
 export default {
   title: 'Confirm Modal',
+  component: ConfirmModal,
 };
 
 const store = createAppStore({});
