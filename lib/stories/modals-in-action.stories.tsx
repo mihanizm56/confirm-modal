@@ -2,6 +2,7 @@ import React from 'react';
 import { createAppStore } from '@wildberries/redux-core-modules';
 import { Button, Text } from '@wildberries/ui-kit';
 import { useDispatch, Provider } from 'react-redux';
+import { text, select } from '@storybook/addon-knobs';
 import { ConfirmModal } from '@/components';
 import { setConfirmModalAction, closeConfirmModalAction } from '@/redux-module';
 
@@ -17,13 +18,19 @@ const SomeYourContentComponent = () => (
   </div>
 );
 
-const SetModalComponent = () => {
+const SetModalComponent = ({
+  title,
+  size,
+  confirmButtonText,
+  cancelButtonText,
+}: any) => {
   const dispatch = useDispatch();
 
   const setModal = () =>
     dispatch(
       setConfirmModalAction({
-        size: 'm',
+        title,
+        size,
         content: <SomeYourContentComponent />,
         confirmActionParams: {
           request: () =>
@@ -42,10 +49,10 @@ const SetModalComponent = () => {
           showNotificationSuccess: true,
         },
         confirmButtonProps: {
-          text: 'Удалить',
+          text: confirmButtonText,
         },
         cancelButtonProps: {
-          text: 'Отмена',
+          text: cancelButtonText,
         },
       }),
     );
@@ -62,6 +69,11 @@ const SetModalComponent = () => {
 export const ModalsInAction = () => (
   <Provider store={store}>
     <ConfirmModal />
-    <SetModalComponent />
+    <SetModalComponent
+      title={text('Confirm modal title', 'Confirm modal title')}
+      size={select('size option', ['s', 'm'], 'm')}
+      confirmButtonText={text('Confirm action button text', 'Подтвердить')}
+      cancelButtonText={text('Cancel modal title', 'Отменить')}
+    />
   </Provider>
 );
