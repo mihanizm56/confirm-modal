@@ -1,6 +1,6 @@
 {
   "name": "@wildberries/confirm-modal-portal",
-  "version": "0.0.4",
+  "version": "0.0.5-beta.2",
   "description": "confirm modal module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -12,11 +12,13 @@
     "compile": "rm -fr ./dist && tsc --project tsconfig.json",
     "lint": "npx eslint . --ext .ts,.tsx --fix",
     "commit": "git add . && git commit --no-edit",
-    "packages-vulnerability-check": "check-audit",
-    "release": "npm run commit && git push && npm publish --access=public",
+    "release": "npm run commit && git push && npm publish --access=public && npm run deploy",
     "beta": "npm run commit && git push && npm publish --tag beta --access=public",
     "size": "pkgfiles",
-    "build": "npm run compile && npm run alias-resolve"
+    "build": "npm run compile && npm run alias-resolve && bash config/build/helper.sh",
+    "start": "start-storybook -p 6006",
+    "build:storybook": "build-storybook",
+    "deploy": "node config/deploy/executor.js"
   },
   "author": "mihanizm56",
   "license": "MIT",
@@ -29,13 +31,20 @@
     "url": "https://github.com/mihanizm56/notifications/issues"
   },
   "dependencies": {
-    "@wildberries/notifications": "1.0.3",
-    "@wildberries/ui-kit": "0.0.1-beta.49",
-    "redux-batched-actions": "0.4.1",
-    "react-final-form": "6.4.0",
-    "final-form": "4.19.1"
+    "@wildberries/notifications": "1.0.5",
+    "@wildberries/ui-kit": "0.0.1-beta.49"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "6.0.21",
+    "@storybook/addon-essentials": "6.0.21",
+    "@storybook/addon-links": "6.0.21",
+    "@storybook/react": "6.0.21",
+    "compression-webpack-plugin": "4.0.0",
+    "glob": "7.1.6",
+    "rimraf": "3.0.2",
+    "css-loader": "4.3.0",
+    "sass-loader": "10.0.2",
+    "style-loader": "1.2.1",
     "@commitlint/cli": "9.1.2",
     "@types/jest": "24.9.1",
     "@types/lodash-es": "4.17.3",
@@ -44,9 +53,11 @@
     "@types/reselect": "2.2.0",
     "@typescript-eslint/eslint-plugin": "2.5.0",
     "@typescript-eslint/parser": "2.5.0",
+    "@wildberries/redux-core-modules": "0.0.36",
     "commitizen": "4.0.4",
     "cross-env": "7.0.2",
     "cz-customizable": "6.2.0",
+    "node-sass": "4.13.1",
     "eslint": "6.6.0",
     "eslint-config-airbnb": "18.0.1",
     "eslint-config-prettier": "6.5.0",
@@ -68,6 +79,18 @@
     "tscpaths": "0.0.9",
     "typescript": "3.8.3"
   },
+  "peerDependencies": {
+    "redux": "4.0.5",
+    "react-redux": "7.2.0",
+    "redux-devtools-extension": "2.13.8",
+    "reselect": "4.0.0",
+    "lodash-es": "4.17.15",
+    "classnames": "2.2.6",
+    "react-transition-group": "4.3.0",
+    "redux-batched-actions": "0.4.1",
+    "react-final-form": "6.4.0",
+    "final-form": "4.19.1"
+  },
   "files": [
     "dist"
   ],
@@ -77,6 +100,14 @@
     },
     "cz-customizable": {
       "config": "config/git/commitizen.js"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS -g config/git/commitlint.js",
+      "pre-commit": "npm run lint && git add . && npm run build",
+      "pre-push": "npm run size",
+      "prepare-commit-msg": "node ./config/git/prepare-commit.js"
     }
   }
 }

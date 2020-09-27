@@ -7,15 +7,15 @@ import {
   getIsConfirmModalOpened,
   getConfirmActionParams,
   getConfirmModalIsLoading,
-} from '@/redux-module/selectors';
-import { closeConfirmModalAction } from '@/redux-module/actions';
+  closeConfirmModalAction,
+  confirmModalActionCreator,
+} from '@/redux-module';
 import {
   BaseAction,
   ActionsConfigType,
   ConfirmModalActionParamsType,
   ConfirmModalStateType,
 } from '@/types/types';
-import { confirmModalActionCreator } from '@/redux-module/action-creator';
 
 type PropsType = {
   isConfirmModalOpened: boolean;

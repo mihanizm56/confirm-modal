@@ -13,7 +13,9 @@
     "strict": true,
     "declaration": true,
     "esModuleInterop": true,
+    "noImplicitAny": true,
     "moduleResolution": "node",
+    "skipLibCheck": true,
     "baseUrl": "./",
     "jsx": "react",
     "paths": {

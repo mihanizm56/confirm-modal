@@ -3,7 +3,7 @@ import { IConfirmModalStoragePart, IConfirmModalStorage } from '@/types/types';
 import { CONFIRM_MODALS_REDUCER_NAME } from './constants';
 import { initialState } from './reducer';
 
-const modalStorageSelector = (store: IConfirmModalStoragePart) =>
+export const modalStorageSelector = (store: IConfirmModalStoragePart) =>
   store[CONFIRM_MODALS_REDUCER_NAME] || initialState;
 
 export const getIsConfirmModalOpened = createSelector(
