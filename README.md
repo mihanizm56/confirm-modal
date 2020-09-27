@@ -2,7 +2,11 @@
 
 [![Build Status](https://travis-ci.org/mihanizm56/confirm-modal.svg?branch=master)](https://travis-ci.org/mihanizm56/confirm-modal)
 
-## Sollution for confirm modals, connected with redux
+## Sollution for confirm modals, connected with redux, based on 
+
+```
+@wildberries/ui-kit
+```
 
 ## Examples of usage
 
@@ -42,7 +46,8 @@ const TestComponent = memo(() => (
 #### SetModalAction params:
   - title - title of the modal
   - content - modal content (React component)
-  - size - modal ui-kit size
+  - titleSize - title size
+  - size - modal size
   - confirmActionParams - params of modal confirmation process (see below)
   - confirmButtonProps - params of confirm button
   - cancelButtonProps- params of cancel button

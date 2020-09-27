@@ -2,6 +2,7 @@ import {
   ButtonVariant,
   ButtonSize,
 } from '@wildberries/ui-kit/lib/button/types';
+import { TitleSizeType, SizeType } from '@wildberries/ui-kit/lib/modal/types';
 import { CONFIRM_MODALS_REDUCER_NAME } from '@/redux-module/constants';
 
 export type IMakeExternalActionParams = {
@@ -71,7 +72,8 @@ export type ConfirmModalActionParamsType = {
 export type ConfirmModalStateType = {
   title?: string;
   content?: any;
-  size: 'm' | 's';
+  size?: SizeType;
+  titleSize?: TitleSizeType;
   confirmActionParams?: ConfirmModalActionParamsType;
   confirmButtonProps: {
     text: string;

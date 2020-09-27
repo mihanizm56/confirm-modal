@@ -72,7 +72,8 @@ export const ModalsInAction = () => (
     <ConfirmModal />
     <SetModalComponent
       title={text('Confirm modal title', 'Confirm modal title')}
-      size={select('size option', ['s', 'm'], 'm')}
+      size={select('size option', ['xs', 's', 'm', 'l', 'xl'], 'm')}
+      titleSize={select('title size option', ['h1', 'h2'], 'h1')}
       confirmButtonText={text('Confirm action button text', 'Подтвердить')}
       cancelButtonText={text('Cancel modal title', 'Отменить')}
     />

@@ -65,7 +65,7 @@ export class WrappedContainer extends Component<PropsType> {
 
   render() {
     const {
-      confirmModalParams: { content, title, size },
+      confirmModalParams: { content, title, size = 'm', titleSize = 'h1' },
       closeConfirmModal,
       isConfirmModalOpened,
     } = this.props;
@@ -79,7 +79,7 @@ export class WrappedContainer extends Component<PropsType> {
         isOpened={isConfirmModalOpened}
         onClose={closeConfirmModal}
         title={title}
-        titleSize="h1"
+        titleSize={titleSize}
         size={size}
       >
         {content}
