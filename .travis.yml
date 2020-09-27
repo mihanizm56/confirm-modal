@@ -8,7 +8,7 @@ cache: yarn
 script:
     - npm run lint
     - npm run compile
-    - npm run build-storybook
+    - npm run build:storybook
 
 deploy:
     provider: pages
