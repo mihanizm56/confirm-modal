@@ -53,7 +53,7 @@ const SetModalComponent = () => {
   return (
     <div style={{ paddingBottom: '30px' }}>
       <div>
-        <Button text="set positive modal" type="button" onClick={setModal} />
+        <Button text="Set confirm modal" type="button" onClick={setModal} />
       </div>
     </div>
   );
