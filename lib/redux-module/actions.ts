@@ -1,4 +1,4 @@
-import { BaseAction, Action, ConfirmModalStateType } from '@/types/types';
+import { BaseAction, Action, ConfirmModalStateType } from '@/types';
 
 export const SET_CONFIRM_MODAL = '@confirm-modal/OPEN_CONFIRM_MODAL';
 export const setConfirmModalAction: Action<

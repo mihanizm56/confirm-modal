@@ -1,8 +1,8 @@
 import { Dispatch } from 'redux';
 import { batchActions } from 'redux-batched-actions';
 import {  setModalAction} from '@wildberries/notifications';
-import { ConfirmModalActionParamsType } from '@/types/types';
-import {  confirmModalLoadingStart, confirmModalLoadingStop } from './actions';
+import { ConfirmModalActionParamsType } from '@/types';
+import {  confirmModalLoadingStart, confirmModalLoadingStop, closeConfirmModalAction } from './actions';
 
 type ParamsType = {
   dispatch: Dispatch;
@@ -25,6 +25,7 @@ export const confirmModalActionCreator = async ({
     showNotificationError,
     showNotificationSuccess,
     resetInitialFormValuesAction,
+    notCloseAfterSuccessRequest
   },
 }: ParamsType) => {
   dispatch(confirmModalLoadingStart())
@@ -58,12 +59,19 @@ export const confirmModalActionCreator = async ({
 
     // dispatch success actions
     if (setSuccessAction) {
-      dispatch(setSuccessAction(formattedResponseData));
-    } else if (setSuccessActionsArray && setSuccessActionsArray.length) {
-      const preparedActions = setSuccessActionsArray.map(action=>action(formattedResponseData))
+      if(!notCloseAfterSuccessRequest){
+        dispatch(batchActions([
+          setSuccessAction(formattedResponseData),
+          closeConfirmModalAction()
+        ]))
+      } else{
+        dispatch(setSuccessAction(formattedResponseData))
+      }
+    } else if (setSuccessActionsArray) {
+      const preparedActions = [...setSuccessActionsArray,closeConfirmModalAction].map(action=>action(formattedResponseData))
 
       dispatch(batchActions(preparedActions));
-    }    
+    }
 
     // trigger success notification
     if (showNotificationSuccess && notificationSuccessConfig) {

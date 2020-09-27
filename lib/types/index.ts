@@ -49,16 +49,17 @@ export type ActionsConfigType = {
 
 export type ConfirmModalActionParamsType = {
   requestParamsFormatter?: (data: any) => any;
-  request: (params: any) => Promise<any>;
-  requestParams: any;
+  request: (params?: any) => Promise<any>;
+  requestParams?: any;
   setErrorAction?: AnyAction;
   setErrorActionsArray?: Array<AnyAction>;
   setSuccessAction?: AnyAction;
   setSuccessActionsArray?: Array<AnyAction>;
   responseDataFormatter?: (data: any) => any;
   resetInitialFormValuesAction?: AnyAction;
-  showNotificationError: boolean;
-  showNotificationSuccess: boolean;
+  showNotificationError?: boolean;
+  showNotificationSuccess?: boolean;
+  notCloseAfterSuccessRequest?: boolean;
   notificationSuccessConfig?: {
     text?: string;
     title?: string;

@@ -44,7 +44,7 @@ const SetModalComponent = ({
               }),
             ),
           requestParams: { foo: 'bar' },
-          setSuccessAction: closeConfirmModalAction,
+          setSuccessActionsArray: [],
           notificationSuccessConfig: { title: 'Пользователь был удалён' },
           showNotificationError: true,
           showNotificationSuccess: true,

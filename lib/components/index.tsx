@@ -15,7 +15,7 @@ import {
   ActionsConfigType,
   ConfirmModalActionParamsType,
   ConfirmModalStateType,
-} from '@/types/types';
+} from '@/types';
 
 type PropsType = {
   isConfirmModalOpened: boolean;
