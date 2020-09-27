@@ -37,10 +37,12 @@
   "devDependencies": {
     "@commitlint/cli": "9.1.2",
     "@storybook/addon-actions": "6.0.22",
+    "@storybook/addon-console": "1.2.2",
     "@storybook/addon-docs": "6.0.22",
     "@storybook/addon-essentials": "6.0.22",
     "@storybook/addon-knobs": "6.0.22",
     "@storybook/addon-links": "6.0.22",
+    "@storybook/addon-viewport": "6.0.22",
     "@storybook/react": "6.0.22",
     "@types/jest": "24.9.1",
     "@types/lodash-es": "4.17.3",
