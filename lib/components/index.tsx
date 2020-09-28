@@ -27,11 +27,11 @@ type PropsType = {
 };
 
 export class WrappedContainer extends Component<PropsType> {
-  confirmModal = () => {
+  confirmModal = async () => {
     const { confirmActionParams, dispatch } = this.props;
 
     if (confirmActionParams) {
-      confirmModalActionCreator({
+      await confirmModalActionCreator({
         dispatch,
         actionParams: confirmActionParams,
       });

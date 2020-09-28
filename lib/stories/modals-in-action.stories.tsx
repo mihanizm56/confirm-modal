@@ -2,9 +2,10 @@ import React from 'react';
 import { createAppStore } from '@wildberries/redux-core-modules';
 import { Button, Text } from '@wildberries/ui-kit';
 import { useDispatch, Provider } from 'react-redux';
-import { text, select } from '@storybook/addon-knobs';
+import { text, select, boolean } from '@storybook/addon-knobs';
+import { Notifications } from '@wildberries/notifications';
 import { ConfirmModal } from '@/components';
-import { setConfirmModalAction, closeConfirmModalAction } from '@/redux-module';
+import { setConfirmModalAction } from '@/redux-module';
 
 export default {
   title: 'Confirm Modal',
@@ -24,6 +25,7 @@ const SetModalComponent = ({
   size,
   confirmButtonText,
   cancelButtonText,
+  notCloseAfterSuccessRequest,
 }: any) => {
   const dispatch = useDispatch();
 
@@ -34,17 +36,28 @@ const SetModalComponent = ({
         size,
         content: <SomeYourContentComponent />,
         confirmActionParams: {
+          notCloseAfterSuccessRequest,
           request: () =>
-            new Promise(res =>
-              res({
-                error: false,
-                errorText: '',
-                adiditionalErrors: null,
-                data: {},
-              }),
-            ),
+            new Promise(res => {
+              // eslint-disable-next-line
+              console.log('CHECK REQUEST');
+
+              setTimeout(() => {
+                res({
+                  error: false,
+                  errorText: '',
+                  adiditionalErrors: null,
+                  data: {},
+                });
+              }, 2000);
+            }),
           requestParams: { foo: 'bar' },
-          setSuccessActionsArray: [],
+          // setSuccessAction: () => ({ type: 'TEST ACTION' }),
+          setSuccessActionsArray: [
+            () => ({ type: 'TEST ACTION_1' }),
+            () => ({ type: 'TEST ACTION_2' }),
+            () => ({ type: 'TEST ACTION_3' }),
+          ],
           notificationSuccessConfig: { title: 'Пользователь был удалён' },
           showNotificationError: true,
           showNotificationSuccess: true,
@@ -70,12 +83,17 @@ const SetModalComponent = ({
 export const ModalsInAction = () => (
   <Provider store={store}>
     <ConfirmModal />
+    <Notifications />
     <SetModalComponent
       title={text('Confirm modal title', 'Confirm modal title')}
       size={select('size option', ['xs', 's', 'm', 'l', 'xl'], 'm')}
       titleSize={select('title size option', ['h1', 'h2'], 'h1')}
       confirmButtonText={text('Confirm action button text', 'Подтвердить')}
       cancelButtonText={text('Cancel modal title', 'Отменить')}
+      notCloseAfterSuccessRequest={boolean(
+        'Not to close modal after succeed request',
+        false,
+      )}
     />
   </Provider>
 );

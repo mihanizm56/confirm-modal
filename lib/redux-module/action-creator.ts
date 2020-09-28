@@ -1,8 +1,13 @@
 import { Dispatch } from 'redux';
 import { batchActions } from 'redux-batched-actions';
-import {  setModalAction} from '@wildberries/notifications';
+import { setModalAction } from '@wildberries/notifications';
 import { ConfirmModalActionParamsType } from '@/types';
-import {  confirmModalLoadingStart, confirmModalLoadingStop, closeConfirmModalAction } from './actions';
+import {
+  confirmModalLoadingStart,
+  confirmModalLoadingStop,
+  closeConfirmModalAction,
+} from './actions';
+import { getErrorData } from './utils/get-error-data';
 
 type ParamsType = {
   dispatch: Dispatch;
@@ -25,10 +30,10 @@ export const confirmModalActionCreator = async ({
     showNotificationError,
     showNotificationSuccess,
     resetInitialFormValuesAction,
-    notCloseAfterSuccessRequest
+    notCloseAfterSuccessRequest,
   },
 }: ParamsType) => {
-  dispatch(confirmModalLoadingStart())
+  dispatch(confirmModalLoadingStart());
 
   if (resetInitialFormValuesAction) {
     dispatch(resetInitialFormValuesAction(requestParams));
@@ -39,81 +44,77 @@ export const confirmModalActionCreator = async ({
     : requestParams;
 
   try {
-    const responseData = await request(formattedRequestParams);
+    const { data, error, errorText } = await request(formattedRequestParams);
 
-    if (responseData.error) {
+    if (error) {
       // serialize data to be catched to the "catch" block and to be parsed
-      throw new Error(
-        JSON.stringify({
-          errorText: responseData.errorText,
-          additionalErrors: responseData.additionalErrors,
-        }),
-      );
+      throw new Error(JSON.stringify(errorText));
     }
 
     // format data
     const formattedResponseData = responseDataFormatter
-      ? responseDataFormatter(responseData.data)
-      : responseData.data;
-      
+      ? responseDataFormatter(data)
+      : data;
 
     // dispatch success actions
     if (setSuccessAction) {
-      if(!notCloseAfterSuccessRequest){
-        dispatch(batchActions([
-          setSuccessAction(formattedResponseData),
-          closeConfirmModalAction()
-        ]))
-      } else{
-        dispatch(setSuccessAction(formattedResponseData))
-      }
+      dispatch(setSuccessAction(formattedResponseData));
     } else if (setSuccessActionsArray) {
-      const preparedActions = [...setSuccessActionsArray,closeConfirmModalAction].map(action=>action(formattedResponseData))
+      const preparedActions = setSuccessActionsArray.map(action =>
+        action(formattedResponseData),
+      );
 
       dispatch(batchActions(preparedActions));
     }
 
     // trigger success notification
     if (showNotificationSuccess && notificationSuccessConfig) {
-      
       dispatch(
         setModalAction({
           status: 'success',
-          text:notificationSuccessConfig.text,
-          title:notificationSuccessConfig.title
+          text: notificationSuccessConfig.text,
+          title: notificationSuccessConfig.title,
         }),
       );
     }
   } catch (error) {
-        // deserialize data from the "catch" block to be parsed
-        const errorData = JSON.parse(error.message);
-        // get additionalErrors from rest and json-rpc requests
-        // eslint-disable-next-line
-        const additionalErrors = errorData.additionalErrors?.errors ?? errorData?.additionalErrors
+    // deserialize data from the "catch" block to be parsed
+    const errorText = getErrorData(error);
+    console.error('(confirm-modal) catch error ', errorText);
 
     // dispatch fail actions
     if (setErrorAction) {
-     dispatch(setErrorAction(errorData.errorText));
-    } else if (setErrorActionsArray && setErrorActionsArray.length) {      // eslint-disable-next-line
-      // @ts-ignore
-      dispatch(batchActions(setErrorActionsArray.map(action=>action(errorData))))
+      dispatch(setErrorAction(errorText));
+    } else if (setErrorActionsArray && setErrorActionsArray.length) {
+      dispatch(
+        batchActions(setErrorActionsArray.map(action => action(errorText))),
+      );
     }
 
     // trigger failed notification
-    if(showNotificationError){
+    if (showNotificationError) {
       dispatch(
         setModalAction({
           status: 'error',
-          text: notificationErrorConfig && notificationErrorConfig.text 
-            ? notificationErrorConfig.text 
-            : '',
-          title: notificationErrorConfig && notificationErrorConfig.title 
-            ? notificationErrorConfig.title 
-            : errorData.errorText,
+          text:
+            notificationErrorConfig && notificationErrorConfig.text
+              ? notificationErrorConfig.text
+              : '',
+          title:
+            notificationErrorConfig && notificationErrorConfig.title
+              ? notificationErrorConfig.title
+              : errorText,
         }),
       );
     }
-  } finally{
-    dispatch(confirmModalLoadingStop())
+  } finally {
+    if (!notCloseAfterSuccessRequest) {
+      dispatch(
+        batchActions([
+          dispatch(confirmModalLoadingStop()),
+          dispatch(closeConfirmModalAction()),
+        ]),
+      );
+    }
   }
 };

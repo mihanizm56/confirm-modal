@@ -1,6 +1,6 @@
 {
   "name": "@wildberries/confirm-modal-portal",
-  "version": "0.0.5",
+  "version": "0.0.6-beta.1",
   "description": "confirm modal module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -52,6 +52,7 @@
     "@typescript-eslint/eslint-plugin": "2.5.0",
     "@typescript-eslint/parser": "2.5.0",
     "@wildberries/redux-core-modules": "0.0.36",
+    "@wildberries/notifications": "1.0.6",
     "commitizen": "4.0.4",
     "compression-webpack-plugin": "4.0.0",
     "cross-env": "7.0.2",
