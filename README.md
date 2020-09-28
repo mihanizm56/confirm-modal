@@ -116,3 +116,8 @@ function ExampleComponent() {
 
 export default ExampleComponent;
 ```
+
+## Please, be careful
+  - close modal action always adds to the user redux actions
+    if you need not to close confirm modal after successful request
+    please set notCloseAfterSuccessRequest option to true
