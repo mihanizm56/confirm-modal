@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { Dispatch, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Modal } from '@wildberries/ui-kit';
+import { Action } from '@wildberries/redux-core-modules';
 import {
   getConfirmModalParams,
   getIsConfirmModalOpened,
   getConfirmActionParams,
   getConfirmModalIsLoading,
   closeConfirmModalAction,
-  confirmModalActionCreator,
+  confirmModalStartActionSaga,
 } from '@/redux-module';
 import {
   BaseAction,
@@ -17,24 +17,26 @@ import {
   ConfirmModalStateType,
 } from '@/types';
 
-type PropsType = {
+type MapStateReturnType = {
   isConfirmModalOpened: boolean;
   confirmModalParams: ConfirmModalStateType;
-  closeConfirmModal: BaseAction;
-  dispatch: Dispatch;
   confirmActionParams?: ConfirmModalActionParamsType;
   isConfirmModalLoading: boolean;
 };
 
+type MapDispatchReturnType = {
+  closeConfirmModal: BaseAction;
+  confirmModalStart: Action<ConfirmModalActionParamsType>;
+};
+
+type PropsType = {} & MapStateReturnType & MapDispatchReturnType;
+
 export class WrappedContainer extends Component<PropsType> {
-  confirmModal = async () => {
-    const { confirmActionParams, dispatch } = this.props;
+  confirmModal = () => {
+    const { confirmActionParams } = this.props;
 
     if (confirmActionParams) {
-      await confirmModalActionCreator({
-        dispatch,
-        actionParams: confirmActionParams,
-      });
+      this.props.confirmModalStart(confirmActionParams);
     }
   };
 
@@ -88,21 +90,17 @@ export class WrappedContainer extends Component<PropsType> {
   }
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: any): MapStateReturnType => ({
   isConfirmModalOpened: getIsConfirmModalOpened(state),
   confirmModalParams: getConfirmModalParams(state),
   confirmActionParams: getConfirmActionParams(state),
   isConfirmModalLoading: getConfirmModalIsLoading(state),
 });
 
-const mapDispatchToProps = (dispatch: Dispatch) =>
-  bindActionCreators(
-    {
-      closeConfirmModal: closeConfirmModalAction,
-      dispatch,
-    },
-    dispatch,
-  );
+const mapDispatchToProps: MapDispatchReturnType = {
+  closeConfirmModal: closeConfirmModalAction,
+  confirmModalStart: confirmModalStartActionSaga,
+};
 
 export const ConfirmModal = connect(
   mapStateToProps,

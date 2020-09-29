@@ -1,6 +1,6 @@
 {
   "name": "@wildberries/confirm-modal-portal",
-  "version": "0.0.6-beta.1",
+  "version": "0.1.0-beta.1",
   "description": "confirm modal module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -94,7 +94,8 @@
     "redux": "4.0.5",
     "redux-batched-actions": "0.4.1",
     "redux-devtools-extension": "2.13.8",
-    "reselect": "4.0.0"
+    "reselect": "4.0.0",
+    "redux-saga": "1.1.1"
   },
   "files": [
     "dist"

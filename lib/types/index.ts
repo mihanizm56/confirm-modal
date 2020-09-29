@@ -60,6 +60,7 @@ export type ConfirmModalActionParamsType = {
   showNotificationError?: boolean;
   showNotificationSuccess?: boolean;
   notCloseAfterSuccessRequest?: boolean;
+  notStopLoadingAfterSuccessRequest?: boolean;
   notificationSuccessConfig?: {
     text?: string;
     title?: string;

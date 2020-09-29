@@ -1,10 +1,24 @@
-import { BaseAction, Action, ConfirmModalStateType } from '@/types';
+import {
+  BaseAction,
+  Action,
+  ConfirmModalStateType,
+  ConfirmModalActionParamsType,
+} from '@/types';
 
 export const SET_CONFIRM_MODAL = '@confirm-modal/OPEN_CONFIRM_MODAL';
 export const setConfirmModalAction: Action<
   ConfirmModalStateType
 > = payload => ({
   type: SET_CONFIRM_MODAL,
+  payload,
+});
+
+export const CONFIRM_START_ACTION_SAGA =
+  '@confirm-modal/CONFIRM_START_ACTION_SAGA';
+export const confirmModalStartActionSaga: Action<
+  ConfirmModalActionParamsType
+> = payload => ({
+  type: CONFIRM_START_ACTION_SAGA,
   payload,
 });
 
@@ -15,12 +29,12 @@ export const closeConfirmModalAction: BaseAction = () => ({
 
 export const CONFIRM_MODAL_LOADING_START =
   '@confirm-modal/CONFIRM_MODAL_LOADING_START';
-export const confirmModalLoadingStart: BaseAction = () => ({
+export const confirmModalLoadingStartAction: BaseAction = () => ({
   type: CONFIRM_MODAL_LOADING_START,
 });
 
 export const CONFIRM_MODAL_LOADING_STOP =
   '@confirm-modal/CONFIRM_MODAL_LOADING_STOP';
-export const confirmModalLoadingStop: BaseAction = () => ({
+export const confirmModalLoadingStopAction: BaseAction = () => ({
   type: CONFIRM_MODAL_LOADING_STOP,
 });

@@ -5,14 +5,22 @@ import { useDispatch, Provider } from 'react-redux';
 import { text, select, boolean } from '@storybook/addon-knobs';
 import { Notifications } from '@wildberries/notifications';
 import { ConfirmModal } from '@/components';
-import { setConfirmModalAction } from '@/redux-module';
+import {
+  setConfirmModalAction,
+  confirmModalWatcherSaga,
+  CONFIRM_MODAL_SAGA_NAME,
+} from '@/redux-module';
 
 export default {
   title: 'Confirm Modal',
   component: ConfirmModal,
 };
 
-const store = createAppStore({});
+const store = createAppStore({
+  rootSagas: {
+    [CONFIRM_MODAL_SAGA_NAME]: confirmModalWatcherSaga,
+  },
+});
 
 const SomeYourContentComponent = () => (
   <div style={{ margin: '100px' }}>
@@ -26,6 +34,7 @@ const SetModalComponent = ({
   confirmButtonText,
   cancelButtonText,
   notCloseAfterSuccessRequest,
+  notStopLoadingAfterSuccessRequest,
 }: any) => {
   const dispatch = useDispatch();
 
@@ -37,6 +46,7 @@ const SetModalComponent = ({
         content: <SomeYourContentComponent />,
         confirmActionParams: {
           notCloseAfterSuccessRequest,
+          notStopLoadingAfterSuccessRequest,
           request: () =>
             new Promise(res => {
               // eslint-disable-next-line
@@ -92,6 +102,10 @@ export const ModalsInAction = () => (
       cancelButtonText={text('Cancel modal title', 'Отменить')}
       notCloseAfterSuccessRequest={boolean(
         'Not to close modal after succeed request',
+        false,
+      )}
+      notStopLoadingAfterSuccessRequest={boolean(
+        'Not to stop loading modal after succeed request',
         false,
       )}
     />

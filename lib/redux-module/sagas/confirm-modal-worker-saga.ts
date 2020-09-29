@@ -1,42 +1,34 @@
-import { Dispatch } from 'redux';
+import { put, call } from 'redux-saga/effects';
 import { batchActions } from 'redux-batched-actions';
 import { setModalAction } from '@wildberries/notifications';
 import { ConfirmModalActionParamsType } from '@/types';
 import {
-  confirmModalLoadingStart,
-  confirmModalLoadingStop,
+  confirmModalLoadingStartAction,
+  confirmModalLoadingStopAction,
   closeConfirmModalAction,
-} from './actions';
-import { getErrorData } from './utils/get-error-data';
+} from '../actions';
 
-type ParamsType = {
-  dispatch: Dispatch;
-  actionParams: ConfirmModalActionParamsType;
-};
-
-export const confirmModalActionCreator = async ({
-  dispatch,
-  actionParams: {
-    request,
-    requestParams,
-    requestParamsFormatter,
-    responseDataFormatter,
-    setErrorAction,
-    setErrorActionsArray,
-    setSuccessAction,
-    setSuccessActionsArray,
-    notificationSuccessConfig,
-    notificationErrorConfig,
-    showNotificationError,
-    showNotificationSuccess,
-    resetInitialFormValuesAction,
-    notCloseAfterSuccessRequest,
-  },
-}: ParamsType) => {
-  dispatch(confirmModalLoadingStart());
+export function* confirmModalWorkerSaga({
+  request,
+  requestParams,
+  requestParamsFormatter,
+  responseDataFormatter,
+  setErrorAction,
+  setErrorActionsArray,
+  setSuccessAction,
+  setSuccessActionsArray,
+  notificationSuccessConfig,
+  notificationErrorConfig,
+  showNotificationError,
+  showNotificationSuccess,
+  resetInitialFormValuesAction,
+  notCloseAfterSuccessRequest,
+  notStopLoadingAfterSuccessRequest,
+}: ConfirmModalActionParamsType) {
+  yield put(confirmModalLoadingStartAction());
 
   if (resetInitialFormValuesAction) {
-    dispatch(resetInitialFormValuesAction(requestParams));
+    resetInitialFormValuesAction(requestParams);
   }
 
   const formattedRequestParams = requestParamsFormatter
@@ -44,11 +36,14 @@ export const confirmModalActionCreator = async ({
     : requestParams;
 
   try {
-    const { data, error, errorText } = await request(formattedRequestParams);
+    const { data, error, errorText } = yield call(
+      request,
+      formattedRequestParams,
+    );
 
     if (error) {
       // serialize data to be catched to the "catch" block and to be parsed
-      throw new Error(JSON.stringify(errorText));
+      throw new Error(errorText);
     }
 
     // format data
@@ -58,18 +53,22 @@ export const confirmModalActionCreator = async ({
 
     // dispatch success actions
     if (setSuccessAction) {
-      dispatch(setSuccessAction(formattedResponseData));
+      yield put(setSuccessAction(formattedResponseData));
     } else if (setSuccessActionsArray) {
       const preparedActions = setSuccessActionsArray.map(action =>
         action(formattedResponseData),
       );
 
-      dispatch(batchActions(preparedActions));
+      yield put(batchActions(preparedActions));
+    }
+
+    if (!notCloseAfterSuccessRequest) {
+      yield put(closeConfirmModalAction());
     }
 
     // trigger success notification
     if (showNotificationSuccess && notificationSuccessConfig) {
-      dispatch(
+      yield put(
         setModalAction({
           status: 'success',
           text: notificationSuccessConfig.text,
@@ -77,23 +76,27 @@ export const confirmModalActionCreator = async ({
         }),
       );
     }
+
+    if (!notStopLoadingAfterSuccessRequest) {
+      yield put(confirmModalLoadingStopAction());
+    }
   } catch (error) {
     // deserialize data from the "catch" block to be parsed
-    const errorText = getErrorData(error);
+    const errorText = error.message;
     console.error('(confirm-modal) catch error ', errorText);
 
     // dispatch fail actions
     if (setErrorAction) {
-      dispatch(setErrorAction(errorText));
+      yield put(setErrorAction(errorText));
     } else if (setErrorActionsArray && setErrorActionsArray.length) {
-      dispatch(
+      yield put(
         batchActions(setErrorActionsArray.map(action => action(errorText))),
       );
     }
 
     // trigger failed notification
     if (showNotificationError) {
-      dispatch(
+      yield put(
         setModalAction({
           status: 'error',
           text:
@@ -107,14 +110,7 @@ export const confirmModalActionCreator = async ({
         }),
       );
     }
-  } finally {
-    if (!notCloseAfterSuccessRequest) {
-      dispatch(
-        batchActions([
-          dispatch(confirmModalLoadingStop()),
-          dispatch(closeConfirmModalAction()),
-        ]),
-      );
-    }
+
+    yield put(confirmModalLoadingStopAction());
   }
-};
+}

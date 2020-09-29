@@ -1,8 +1,10 @@
 export {
   setConfirmModalAction,
   closeConfirmModalAction,
-} from './redux-module/actions';
-export { confirmModalModuleReducer } from './redux-module/reducer';
+  confirmModalWatcherSaga,
+  CONFIRM_MODAL_SAGA_NAME,
+  CONFIRM_MODALS_REDUCER_NAME,
+  confirmModalModuleReducer,
+} from './redux-module';
 export { ConfirmModal } from './components';
-export { CONFIRM_MODALS_REDUCER_NAME } from './redux-module/constants';
 export { ConfirmModalStateType } from './types';
