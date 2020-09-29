@@ -41,18 +41,6 @@ const TestComponent = memo(() => (
 )
 ```
 
-### Insert the configuration to your createStore function
-
-```javascript
-import { CONFIRM_MODAL_SAGA_NAME, confirmModalWatcherSaga } from '@wildberries/confirm-modal-portal';
-
-const store = createAppStore({
-  rootSagas: {
-    [CONFIRM_MODAL_SAGA_NAME]: confirmModalWatcherSaga,
-  },
-});
-```
-
 ### Dispatch setConfirmModalAction to add confirm modal
 
 #### SetModalAction params:
@@ -78,6 +66,12 @@ const store = createAppStore({
   - resetInitialFormValuesAction - resetting form values (RFF needs if connected to the redux)
   - showNotificationError - flag to show error notification when error from the request comes
   - showNotificationSuccess - flag to show success notification when success from the request comes
+
+#### Please, Be careful, these actions are not from connect - but pure actions:
+  - setErrorAction
+  - setErrorActionsArray
+  - setSuccessAction
+  - setSuccessActionsArray
 
 ```javascript
 import React from "react";

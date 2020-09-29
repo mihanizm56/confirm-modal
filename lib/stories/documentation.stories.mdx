@@ -47,18 +47,6 @@ const TestComponent = memo(() => (
 )
 ```
 
-### Insert the configuration to your createStore function
-
-```javascript
-import { CONFIRM_MODAL_SAGA_NAME, confirmModalWatcherSaga } from '@wildberries/confirm-modal-portal';
-
-const store = createAppStore({
-  rootSagas: {
-    [CONFIRM_MODAL_SAGA_NAME]: confirmModalWatcherSaga,
-  },
-});
-```
-
 ### Dispatch setConfirmModalAction to add confirm modal
 
 #### SetModalAction params:
