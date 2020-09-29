@@ -84,7 +84,6 @@ export type ConfirmModalStateType = {
     text: string;
     action?: AnyAction;
   };
-  notCloseAfterSuccessRequest?: boolean;
 };
 
 export type AnyAction = (payload?: any) => { type: string; payload?: any };
