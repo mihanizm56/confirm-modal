@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Modal } from '@wildberries/ui-kit';
-import { Action } from '@wildberries/redux-core-modules';
 import {
   getConfirmModalParams,
   getIsConfirmModalOpened,
@@ -11,6 +10,7 @@ import {
   confirmModalStartActionSaga,
 } from '@/redux-module';
 import {
+  Action,
   BaseAction,
   ActionsConfigType,
   ConfirmModalActionParamsType,
