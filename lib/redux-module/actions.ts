@@ -3,7 +3,7 @@ import {
   Action,
   ConfirmModalStateType,
   ConfirmModalActionParamsType,
-} from '@/types';
+} from '@/_types';
 
 export const SET_CONFIRM_MODAL = '@confirm-modal/OPEN_CONFIRM_MODAL';
 export const setConfirmModalAction: Action<

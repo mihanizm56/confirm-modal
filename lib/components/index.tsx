@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Modal } from '@wildberries/ui-kit';
 import {
   getConfirmModalParams,
   getIsConfirmModalOpened,
@@ -15,7 +14,8 @@ import {
   ActionsConfigType,
   ConfirmModalActionParamsType,
   ConfirmModalStateType,
-} from '@/types';
+} from '@/_types';
+import { Modal } from './kit-components/modal';
 
 type MapStateReturnType = {
   isConfirmModalOpened: boolean;

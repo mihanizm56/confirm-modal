@@ -1,7 +1,6 @@
 import { put, call } from 'redux-saga/effects';
 import { batchActions } from 'redux-batched-actions';
-import { setModalAction } from '@wildberries/notifications';
-import { ConfirmModalActionParamsType } from '@/types';
+import { ConfirmModalActionParamsType } from '@/_types';
 import {
   confirmModalLoadingStartAction,
   confirmModalLoadingStopAction,
@@ -24,6 +23,7 @@ export function* confirmModalWorkerSaga({
   resetInitialFormValuesAction,
   notCloseAfterSuccessRequest,
   notStopLoadingAfterSuccessRequest,
+  setModalAction,
 }: ConfirmModalActionParamsType) {
   yield put(confirmModalLoadingStartAction());
 
@@ -67,7 +67,11 @@ export function* confirmModalWorkerSaga({
     }
 
     // trigger success notification
-    if (showNotificationSuccess && notificationSuccessConfig) {
+    if (
+      showNotificationSuccess &&
+      notificationSuccessConfig &&
+      setModalAction
+    ) {
       yield put(
         setModalAction({
           status: 'success',
@@ -95,7 +99,7 @@ export function* confirmModalWorkerSaga({
     }
 
     // trigger failed notification
-    if (showNotificationError) {
+    if (showNotificationError && setModalAction) {
       yield put(
         setModalAction({
           status: 'error',

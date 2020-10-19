@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { IConfirmModalStoragePart, IConfirmModalStorage } from '@/types';
+import { IConfirmModalStoragePart, IConfirmModalStorage } from '@/_types';
 import { CONFIRM_MODALS_REDUCER_NAME } from './constants';
 import { initialState } from './reducer';
 

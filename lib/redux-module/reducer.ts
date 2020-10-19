@@ -1,4 +1,4 @@
-import { IConfirmModalStorage } from '@/types';
+import { IConfirmModalStorage } from '@/_types';
 import {
   SET_CONFIRM_MODAL,
   CLOSE_CONFIRM_MODAL,

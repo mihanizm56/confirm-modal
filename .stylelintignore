@@ -1,0 +1,11 @@
+**/*.js
+**/*.ts
+**/*.jsx
+**/*.tsx
+dist/**
+**/*.json
+**/*.woff
+**/*.woff2
+**/*.cmd
+**/*.sh
+LICENSE

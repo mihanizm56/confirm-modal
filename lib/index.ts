@@ -8,4 +8,4 @@ export {
   confirmModalLoadingStopAction,
 } from './redux-module';
 export { ConfirmModal } from './components';
-export { ConfirmModalStateType } from './types';
+export { ConfirmModalStateType } from './_types';

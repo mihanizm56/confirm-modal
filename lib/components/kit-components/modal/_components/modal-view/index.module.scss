@@ -1,0 +1,176 @@
+@import "../../../styles/constants.module.scss";
+@import "../../../styles/media.module";
+@import "../../../styles/mixins.module";
+
+.Modal {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  max-height: 80vh;
+  padding: 48px 48px 32px 48px;
+  background-color: $White;
+  border-radius: 6px;
+  box-shadow: 0 0 26px rgba(0, 0, 0, .19);
+
+  &--xs {
+    min-width: 360px;
+    max-width: 100%;
+  }
+
+  &--s {
+    width: 496px;
+  }
+
+  &--m {
+    width: 496px;
+  }
+
+  &--l {
+    width: 696px;
+  }
+
+  &--xl {
+    width: 996px;
+  }
+
+  &--no-padding {
+    width: auto;
+    height: auto;
+    padding: 0;
+    background: $Black;
+    opacity: .3;
+  }
+
+  &--dark-theme {
+    background-color: $CICD;
+  }
+
+  &--with-out-overlay {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    padding: 24px;
+    transform: translateX(-50%);
+
+    &.Modal--s {
+      width: auto;
+      min-width: 240px;
+      max-width: 400px;
+    }
+  }
+
+  &__title {
+    display: block;
+    white-space: normal;
+  }
+
+  &__close-button {
+    position: absolute;
+    top: 9px;
+    right: 9px;
+  }
+
+  &__content {
+    box-sizing: border-box;
+    height: 100%;
+    padding: 0 48px;
+    margin: 24px -48px 0 -48px;
+    overflow-y: auto;
+
+    &--no-padding {
+      padding: 0;
+      margin: 24px 0 0 0;
+    }
+
+    &--with-out-overlay {
+      padding: 0 24px;
+      margin: 0 -24px 0 -24px;
+    }
+  }
+
+  &__action-buttons {
+    display: flex;
+    margin-top: 24px;
+
+    &--with-out-overlay {
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  &__button {
+    display: inline-block;
+    vertical-align: middle;
+
+    &--last {
+      padding-left: 24px;
+    }
+  }
+}
+
+@media #{$mobile} {
+  .Modal {
+    min-width: 100%;
+    max-height: 85vh;
+    padding: 24px;
+    font-family: $LatoFont;
+    border-radius: 0;
+
+    &--m,
+    &--l,
+    &--xl {
+      max-width: 100%;
+    }
+
+    &--with-out-overlay {
+      &.Modal--s {
+        width: auto;
+        min-width: 240px;
+        max-width: 400px;
+      }
+    }
+
+    &__title {
+      display: block;
+      margin-top: 10px;
+      white-space: normal;
+    }
+
+    &__close-button {
+      position: absolute;
+      top: 6px;
+      right: 10px;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    &__content {
+      box-sizing: border-box;
+      height: 100%;
+      margin-top: 8px;
+      overflow-y: auto;
+    }
+
+    &__action-buttons {
+      display: inline-block;
+      margin-top: 16px;
+    }
+
+    &__button {
+      width: 100%;
+
+      &:first-child {
+        padding-bottom: 8px;
+      }
+
+      &--last {
+        padding-left: 0;
+      }
+    }
+  }
+}

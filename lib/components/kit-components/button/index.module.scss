@@ -1,0 +1,622 @@
+@import "../styles/constants.module.scss";
+@import "../styles/media.module.scss";
+
+%behaviour-opacity-big {
+  &:hover {
+    opacity: .9;
+  }
+
+  &:disabled {
+    opacity: .4;
+  }
+}
+
+%behaviour-opacity-small {
+  &:hover {
+    opacity: .8;
+  }
+
+  &:disabled {
+    opacity: .4;
+  }
+}
+
+.Button {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 24px;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 4px;
+
+  &--icon-no-variant-big {
+    width: 44px;
+    height: 44px;
+    border: none;
+
+    &:hover {
+      border: none;
+      opacity: .9;
+      transition: opacity .3s;
+    }
+  }
+
+  &--icon-no-variant-small {
+    width: 36px;
+    height: 36px;
+    border: none;
+
+    &:hover {
+      border: none;
+      opacity: .9;
+      transition: opacity .3s;
+    }
+  }
+
+  &--add {
+    background-color: $White;
+    border: 1px dashed $RichGrey;
+    border-radius: 4px;
+
+    @extend %behaviour-opacity-small;
+
+    &:focus {
+      box-shadow: 0 0 0 2px $Blue;
+    }
+
+    &:active {
+      padding: 11px 24px;
+      background-color: $LightGrey;
+
+      box-shadow: none;
+    }
+  }
+
+  &--add-small {
+    background-color: $White;
+    border: 1px dashed $RichGrey;
+    border-radius: 4px;
+
+    @extend %behaviour-opacity-small;
+
+    &:focus {
+      box-shadow: 0 0 0 2px $Blue;
+    }
+
+    &:active {
+      padding: 7px 24px;
+      background-color: $LightGrey;
+
+      box-shadow: none;
+    }
+  }
+
+  &--remove {
+    background-color: $White;
+    border: 1px solid $Red;
+    border-radius: 4px;
+
+    &:focus {
+      box-shadow: 0 0 0 2px $Blue;
+    }
+
+    @extend %behaviour-opacity-small;
+
+    &:active {
+      padding: 11px 24px;
+      background-color: rgba(249, 102, 102, .2);
+
+      box-shadow: none;
+    }
+  }
+
+  &--remove-small {
+    background-color: $White;
+    border: 1px solid $Red;
+    border-radius: 4px;
+
+    @extend %behaviour-opacity-small;
+
+    &:focus {
+      box-shadow: 0 0 0 2px $Blue;
+    }
+
+    &:active {
+      padding: 7px 24px;
+      background-color: rgba(249, 102, 102, .2);
+
+      box-shadow: none;
+    }
+  }
+
+  &--main {
+    background-color: $Orange;
+    border: 1px solid $Orange;
+    border-radius: 4px;
+
+    @extend %behaviour-opacity-big;
+
+    &:focus {
+      box-shadow: 0 0 0 2px $Blue;
+    }
+
+    &:active {
+      background-color: $MainPressed;
+
+      box-shadow: none;
+    }
+  }
+
+  &--main-small {
+    background-color: $Orange;
+    border: 1px solid $Orange;
+    border-radius: 4px;
+
+    @extend %behaviour-opacity-big;
+
+    &:focus {
+      box-shadow: 0 0 0 2px $Blue;
+    }
+
+    &:active {
+      background-color: $MainPressed;
+
+      box-shadow: none;
+    }
+  }
+
+  &--accent {
+    background-color: $Purple;
+    border: 1px solid $Purple;
+    border-radius: 4px;
+
+    @extend %behaviour-opacity-big;
+
+    &:focus {
+      box-shadow: 0 0 0 2px $Cyan;
+    }
+
+    &:active {
+      background-color: $AccentPressed;
+
+      box-shadow: none;
+    }
+  }
+
+  &--accent-small {
+    background-color: $Purple;
+    border: 1px solid $Purple;
+    border-radius: 4px;
+
+    @extend %behaviour-opacity-big;
+
+    &:focus {
+      box-shadow: 0 0 0 2px $Cyan;
+    }
+
+    &:active {
+      background-color: $AccentPressed;
+
+      box-shadow: none;
+    }
+  }
+
+  &--interface {
+    background-color: $White;
+    border: 1px solid $Grey;
+    border-radius: 4px;
+
+    @extend %behaviour-opacity-small;
+
+    &:focus {
+      box-shadow: 0 0 0 2px $Blue;
+    }
+
+    &:active {
+      background-color: $LightGrey;
+
+      box-shadow: none;
+    }
+  }
+
+  &--interface-small {
+    background-color: $White;
+    border: 1px solid $Grey;
+    border-radius: 4px;
+
+    @extend %behaviour-opacity-small;
+
+    &:focus {
+      box-shadow: 0 0 0 2px $Blue;
+    }
+
+    &:active {
+      background-color: $LightGrey;
+
+      box-shadow: none;
+    }
+  }
+
+  &--neutral {
+    background-color: $DarkTheme;
+    border: 1px solid $Grey;
+    border-radius: 4px;
+
+    @extend %behaviour-opacity-small;
+
+    &:focus {
+      box-shadow: 0 0 0 2px $Blue;
+    }
+
+    &:active {
+      background-color: rgba($White, .2);
+
+      box-shadow: none;
+    }
+  }
+
+  &--positive {
+    background-color: $DarkTheme;
+    border: 1px solid $SuccessButtonColor;
+    border-radius: 4px;
+
+    @extend %behaviour-opacity-small;
+
+    &:focus {
+      box-shadow: 0 0 0 2px $Blue;
+    }
+
+    &:active {
+      background-color: rgba(222, 241, 221, .2);
+
+      box-shadow: none;
+    }
+  }
+
+  &--negative {
+    background-color: $DarkTheme;
+    border: 1px solid $Red;
+    border-radius: 4px;
+
+    @extend %behaviour-opacity-small;
+
+    &:focus {
+      box-shadow: 0 0 0 2px $Blue;
+    }
+
+    &:active {
+      background-color: rgba(222, 241, 221, .2);
+
+      box-shadow: none;
+    }
+  }
+
+  &--success {
+    background-color: $SuccessButtonColor;
+    border: 1px solid $SuccessButtonColor;
+  }
+
+  &--single {
+    padding: 0;
+    background-color: transparent;
+    border: none;
+
+    &:active {
+      padding: 0;
+      background-color: transparent;
+      border: none;
+    }
+
+    &:focus {
+      padding: 0;
+      background-color: transparent;
+      border: none;
+    }
+  }
+
+  &--big {
+    padding: 11px 23px;
+  }
+
+  &--icon-text-big {
+    padding: 9px 23px;
+  }
+
+  &--small {
+    padding: 7px 23px;
+  }
+
+  &--icon-text-small {
+    padding: 5px 23px;
+  }
+
+  &--adaptive {
+    display: none;
+
+    @media (max-width: $max-tablet-width) {
+      display: flex;
+      width: 128px;
+      padding: 10px 0;
+      background: linear-gradient(166.13deg, #fe8753 14.52%, #ff4228 87.95%);
+      border: none;
+      border-radius: 4px;
+    }
+
+    &-icon-menu {
+      width: initial;
+      padding: 10px 10px;
+    }
+
+    &-icon-close {
+      width: initial;
+      padding: 14px 14px;
+    }
+
+    &:active {
+      background: linear-gradient(166.63deg, #fb6626 14.52%, #b92815 87.95%);
+    }
+  }
+
+  &--interface-menu {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: 16px;
+    font-weight: 700;
+    background-color: $White;
+    border: none;
+
+    &:hover {
+      color: $DarkPurple;
+    }
+  }
+
+  &--accent-menu {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: 16px;
+    font-weight: 700;
+    background-color: $DarkPurple;
+    border: none;
+  }
+
+  &--absolute {
+    position: relative;
+  }
+
+  &--full-width {
+    justify-content: left;
+    width: 100%;
+  }
+
+  &--align-center {
+    justify-content: center;
+  }
+
+  &--disabled {
+    opacity: .4;
+    &:hover {
+      cursor: default;
+      opacity: .4;
+    }
+  }
+
+  &:focus {
+    outline: 0;
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-right: 12px;
+
+    &--small {
+      padding-right: 10px;
+    }
+
+    &--single {
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      border-radius: 4px;
+      opacity: 1;
+
+      &:hover {
+        border: none;
+        opacity: .9;
+        transition: opacity .3s;
+      }
+
+      &-no-variant {
+        padding: 0;
+        &:hover {
+          opacity: .9;
+        }
+      }
+
+      &-adaptive {
+        width: initial;
+        height: initial;
+      }
+    }
+  }
+
+  &__text {
+    font-family: $LatoFontBold;
+    font-size: 16px;
+    line-height: 20px;
+
+    &--white {
+      color: $White;
+    }
+
+    &--dark {
+      font-family: $LatoFont;
+      color: $Black;
+    }
+
+    &--success {
+      color: $SuccessTextColor;
+    }
+
+    &--positive {
+      font-family: $LatoFont;
+      color: $SuccessButtonColor;
+    }
+
+    &--neutral {
+      font-family: $LatoFont;
+      color: $White;
+    }
+
+    &--negative {
+      font-family: $LatoFont;
+      color: $Red;
+    }
+
+    &--adaptive {
+      font-size: 18px;
+      line-height: 24px;
+      color: $White;
+    }
+
+    &--uppercase {
+      text-transform: uppercase;
+    }
+
+    &--interface-menu {
+      font-size: 20px;
+      line-height: 28px;
+    }
+
+    &--accent-menu {
+      font-size: 20px;
+      line-height: 28px;
+      color: $White;
+    }
+
+    &--loading-remove {
+      visibility: hidden;
+    }
+  }
+}
+
+@media #{$mobile} {
+  .Button {
+    width: 100%;
+    padding: 13px 0;
+
+    &:focus {
+      padding: 13px 0;
+    }
+
+    &:active {
+      padding: 13px 0;
+    }
+
+    &--main:focus {
+      border: 1px solid $Orange;
+      box-shadow: none;
+    }
+
+    &--accent:focus {
+      border: 1px solid $AccentPressed;
+      box-shadow: none;
+    }
+
+    &--interface:focus {
+      border: 1px solid $Grey;
+      box-shadow: none;
+    }
+
+    &--remove {
+      display: none;
+    }
+
+    &--add {
+      display: none;
+    }
+
+    &--positive {
+      display: none;
+    }
+
+    &--negative {
+      display: none;
+    }
+
+    &--neutral {
+      display: none;
+    }
+
+    &--icon-no-variant-big {
+      width: 48px;
+      height: 48px;
+      padding: 0;
+    }
+
+    &--icon-no-variant-small {
+      width: 48px;
+      height: 48px;
+      padding: 0;
+    }
+
+    &--adaptive {
+      width: 128px;
+      padding: 12px 0;
+
+      &:focus {
+        padding: 12px 0;
+      }
+
+      &:active {
+        padding: 12px 0;
+      }
+    }
+
+    &--adaptive-icon-menu {
+      width: initial;
+      padding: 10px 10px;
+
+      &:focus {
+        padding: 10px 10px;
+      }
+
+      &:active {
+        padding: 10px 10px;
+      }
+    }
+
+    &--adaptive-icon-close {
+      width: initial;
+      padding: 14px 14px;
+
+      &:focus {
+        padding: 14px 14px;
+      }
+
+      &:active {
+        padding: 14px 14px;
+      }
+    }
+
+    &__icon {
+      padding-right: 8px;
+
+      &--single-no-variant,
+      &--single-adaptive {
+        padding: 0;
+      }
+    }
+
+    &__text {
+      &--adaptive {
+        font-size: 16px;
+        line-height: 20px;
+      }
+    }
+  }
+}

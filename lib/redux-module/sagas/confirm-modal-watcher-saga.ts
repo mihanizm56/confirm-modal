@@ -1,5 +1,5 @@
 import { take, fork } from 'redux-saga/effects';
-import { ConfirmModalActionParamsType } from '@/types';
+import { ConfirmModalActionParamsType } from '@/_types';
 import { CONFIRM_START_ACTION_SAGA } from '../actions';
 import { confirmModalWorkerSaga } from './confirm-modal-worker-saga';
 

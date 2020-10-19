@@ -1,0 +1,432 @@
+@import "../styles/constants.module.scss";
+@import "../styles/media.module.scss";
+@import "../styles/mixins.module.scss";
+
+.Button-link {
+  position: relative;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-family: $LatoFont;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  cursor: pointer;
+  outline: none;
+  transition: opacity .3s;
+
+  &:hover {
+    opacity: .9;
+  }
+
+  &:active {
+    box-shadow: none;
+  }
+
+  &:disabled {
+    cursor: default;
+    opacity: .4;
+  }
+
+  &--full-width {
+    width: 100%;
+  }
+
+  &--text-center {
+    justify-content: center;
+  }
+
+  &--link {
+    color: $DarkPurple;
+    text-decoration: underline;
+    background-color: transparent;
+    border: none;
+
+    &:hover {
+      color: $Orange;
+      text-decoration: none;
+    }
+
+    &-breadcrumbs {
+      text-decoration: none;
+    }
+
+    &-pop-up {
+      text-decoration: none;
+      border-bottom: 2px dotted $DarkPurple;
+
+      &:hover {
+        border-bottom: 2px dotted $Orange;
+      }
+
+      &-dark {
+        border-color: $White;
+
+        &:hover {
+          border-color: $Yalo;
+        }
+      }
+    }
+
+    &-dark {
+      color: $White;
+
+      &:hover {
+        color: $Yalo;
+        text-decoration: none;
+      }
+    }
+  }
+
+  &--button {
+    text-decoration: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+
+    &-big {
+      padding: 11px 23px;
+    }
+
+    &-small {
+      padding: 7px 23px;
+    }
+  }
+
+  &--main {
+    color: $White;
+    background-color: $Orange;
+    border-color: $Orange;
+
+    &:focus {
+      box-shadow: 0 0 0 2px $Blue;
+    }
+
+    &:active {
+      background-color: $MainPressed;
+      border-color: $MainPressed;
+
+      &:disabled {
+        background-color: $Orange;
+        border-color: $Orange;
+      }
+    }
+
+    &-dark {
+      font-weight: 500;
+      color: $SuccessButtonColor;
+      background-color: $RichGrey;
+      border-color: $SuccessButtonColor;
+
+      &:focus {
+        box-shadow: 0 0 0 2px $Blue;
+      }
+
+      &:active {
+        background: rgba(222, 241, 221, .2);
+        border: 1px solid $SuccessButtonColor;
+      }
+    }
+  }
+
+  &--accent {
+    color: $White;
+    background-color: $Purple;
+    border: 1px solid $Purple;
+
+    &:focus {
+      box-shadow: 0 0 0 2px $Cyan;
+    }
+
+    &:active {
+      background-color: $AccentPressed;
+      border-color: $AccentPressed;
+
+      &:disabled {
+        background-color: $Purple;
+        border: $Purple;
+      }
+    }
+
+    &-dark {
+      font-family: $LatoFontBold;
+      color: $Black;
+      background-color: $Yalo;
+      border-color: $Yalo;
+
+      &:focus {
+        box-shadow: 0 0 0 2px $Cyan;
+      }
+
+      &:active {
+        background: linear-gradient(0deg, rgba(255, 255, 255, .3), rgba(255, 255, 255, .3)), $Yalo;
+        border: 1px solid transparent;
+
+        &:disabled {
+          background: $Yalo;
+          border: $Yalo;
+        }
+      }
+    }
+  }
+
+  &--interface {
+    font-weight: 500;
+    color: $Black;
+    background-color: $White;
+    border-color: $Grey;
+
+    &:focus {
+      box-shadow: 0 0 0 2px $Blue;
+    }
+
+    &:active {
+      background-color: $LightGrey;
+      border-color: $Grey;
+
+      &:disabled {
+        background-color: $White;
+        border-color: $Grey;
+      }
+    }
+
+    &-dark {
+      font-weight: 500;
+      color: $White;
+      background-color: $RichGrey;
+      border-color: $Grey;
+
+      &:focus {
+        box-shadow: 0 0 0 2px $Blue;
+      }
+
+      &:active {
+        background: linear-gradient(0deg, rgba(255, 255, 255, .2), rgba(255, 255, 255, .2)), $DarkTheme;
+        border-color: $Grey;
+
+        &:disabled {
+          background: $RichGrey;
+          border-color: $Grey;
+        }
+      }
+    }
+  }
+
+  &--success {
+    color: $SuccessTextColor;
+    cursor: default;
+    background-color: $SuccessButtonColor;
+    border-color: $SuccessButtonColor;
+
+    &:hover,
+    &:disabled {
+      opacity: 1;
+    }
+  }
+
+  &--interface-menu,
+  &--accent-menu {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: 16px;
+    font-weight: 700;
+    background-color: $White;
+    border: none;
+
+    &:hover {
+      color: $DarkPurple;
+    }
+  }
+
+  &--accent-menu {
+    color: $White;
+    background-color: $DarkPurple;
+  }
+
+  &--remove {
+    font-weight: 500;
+    color: $Red;
+    background-color: $White;
+    border-color: $Red;
+
+    &:focus {
+      box-shadow: 0 0 0 2px $Blue;
+    }
+
+    &:active {
+      background-color: rgba(249, 102, 102, .2);
+
+      &:disabled {
+        background-color: $White;
+      }
+    }
+
+    &-dark {
+      font-weight: 500;
+      color: $Red;
+      background-color: $RichGrey;
+      border-color: $Red;
+
+      &:focus {
+        box-shadow: 0 0 0 2px $Blue;
+      }
+
+      &:active {
+        background: linear-gradient(0deg, rgba(249, 102, 102, .2), rgba(249, 102, 102, .2)), $DarkTheme;
+
+        &:disabled {
+          background: $RichGrey;
+        }
+      }
+    }
+  }
+
+  &--add {
+    font-weight: 500;
+    color: $Black;
+    background-color: $White;
+    border: 1px dashed $RichGrey;
+
+    &:focus {
+      box-shadow: 0 0 0 2px $Blue;
+    }
+
+    &:active {
+      background-color: $LightGrey;
+
+      &:disabled {
+        background: $White;
+      }
+    }
+  }
+
+  &--no-text {
+    &-small {
+      padding: 5px;
+    }
+
+    &-big {
+      padding: 9px;
+    }
+  }
+
+  &--only-icon {
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    background-color: transparent;
+
+    &:active {
+      box-shadow: none;
+    }
+
+    &-small {
+      width: 36px;
+      height: 36px;
+    }
+  }
+
+  &--icon-text-big {
+    padding: 9px 23px;
+  }
+
+  &--icon-text-small {
+    padding: 5px 23px;
+  }
+
+  &--player {
+    padding: 5px 15px;
+    background-color: $RichGrey;
+
+    &:focus {
+      background-color: $Orange;
+      box-shadow: none;
+    }
+
+    &:active {
+      background-color: $RichGrey;
+      box-shadow: 0 0 0 2px $Blue;
+    }
+
+    &-dark {
+      &:focus {
+        background-color: $Yalo;
+        box-shadow: none;
+      }
+
+      &:active {
+        background-color: $RichGrey;
+        box-shadow: 0 0 0 2px $Blue;
+      }
+    }
+  }
+
+  &__text {
+    &--uppercase {
+      text-transform: uppercase;
+    }
+  }
+
+  &__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    &--left {
+      &-big {
+        padding-right: 12px;
+      }
+
+      &-small {
+        padding-right: 10px;
+      }
+    }
+
+    &--right {
+      &-big {
+        padding-left: 12px;
+      }
+
+      &-small {
+        padding-left: 10px;
+      }
+    }
+
+    &--no-text {
+      padding: 0;
+    }
+
+    &--have-right-icon {
+      padding-right: 3px;
+    }
+
+    &--have-left-icon {
+      padding-left: 3px;
+    }
+  }
+}
+
+
+@media #{$mobile} {
+  .Button-link {
+    justify-content: center;
+    width: 100%;
+    &--button-big {
+      padding: 13px 23px;
+    }
+
+    &:focus {
+      box-shadow: none;
+    }
+
+    &--only-icon {
+      width: 48px;
+      height: 48px;
+    }
+
+    &--icon-text-big {
+      padding: 11px 23px;
+    }
+  }
+}

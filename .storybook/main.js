@@ -18,6 +18,19 @@ module.exports = {
       include: path.resolve(__dirname, '../'),
     });
 
+    config.module.rules.push({
+      test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+      use: [
+        {
+          loader: 'file-loader',
+          query: {
+            name: '[name].[ext]',
+          },
+        },
+      ],
+      include: path.resolve(__dirname, '../'),
+    });
+
     if (configType === 'PRODUCTION') {
       config.plugins.push(
         new CompressionPlugin({

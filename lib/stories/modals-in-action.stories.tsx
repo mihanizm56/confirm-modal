@@ -1,15 +1,16 @@
 import React from 'react';
 import { createAppStore } from '@wildberries/redux-core-modules';
-import { Button, Text } from '@wildberries/ui-kit';
 import { useDispatch, Provider } from 'react-redux';
 import { text, select, boolean } from '@storybook/addon-knobs';
-import { Notifications } from '@wildberries/notifications';
+import { Notifications, setModalAction } from '@wildberries/notifications';
 import { ConfirmModal } from '@/components';
 import {
   setConfirmModalAction,
   confirmModalWatcherSaga,
   CONFIRM_MODAL_SAGA_NAME,
 } from '@/redux-module';
+import { Text } from '@/components/kit-components/text';
+import { Button } from '@/components/kit-components/button';
 
 export default {
   title: 'Confirm Modal',
@@ -23,7 +24,7 @@ const store = createAppStore({
 });
 
 const SomeYourContentComponent = () => (
-  <div style={{ margin: '100px' }}>
+  <div style={{ margin: '0' }}>
     <Text text="SomeYourContentComponent" size="h3" color="black" />
   </div>
 );
@@ -45,6 +46,7 @@ const SetModalComponent = ({
         size,
         content: <SomeYourContentComponent />,
         confirmActionParams: {
+          setModalAction,
           notCloseAfterSuccessRequest,
           notStopLoadingAfterSuccessRequest,
           request: () =>
