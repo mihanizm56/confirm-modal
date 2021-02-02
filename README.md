@@ -1,4 +1,4 @@
-# @wildberries/confirm-modal-portal
+# confirm-modal-portal
 
 [![Build Status](https://travis-ci.org/mihanizm56/confirm-modal.svg?branch=master)](https://travis-ci.org/mihanizm56/confirm-modal)
 
